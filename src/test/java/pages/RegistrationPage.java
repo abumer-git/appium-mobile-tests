@@ -198,5 +198,11 @@ public class RegistrationPage {
         cancel2.click();
         return this;
     }
+    public String getDisplayedUserName() {
+        WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(
+                MobileBy.id("com.cscsonline.cscs:id/tvUserName")));
+        return el.getText();
+    }
+
 
 }

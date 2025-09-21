@@ -10,6 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RegistrationTest {
 
@@ -27,6 +29,9 @@ public class RegistrationTest {
         caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("app", "/Users/abumer/Downloads/CR-39D-Final_QA_1.apk");
         caps.setCapability("noReset", true);
+        caps.setCapability("autoGrantPermissions", true);
+        caps.setCapability("dontStopAppOnReset", true);
+
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         driver.resetApp();
@@ -61,7 +66,18 @@ public class RegistrationTest {
                 .loginAfterMobileOTP()
                 .tapZeroTimes(12)
                 .cancelTwice();
+        //  Final assertion
+        String expectedName = registeredUser.firstName + " " + registeredUser.lastName;
+        String actualName = registrationPage.getDisplayedUserName();
 
+        logger.info("Asserting Home page username...");
+        logger.info("Expected: " + expectedName);
+        logger.info("Actual: " + actualName);
+
+        assertEquals(expectedName, actualName,
+                "The displayed user name on Home page should match registration details");
+
+        logger.info("Assertion passed: Home page username is correct ✅");
 
         logger.info("Registration flow completed successfully");
     }

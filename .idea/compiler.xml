@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="appium-junit-demo" />
+        <module name="appium-junit-test" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="appium-junit-demo" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

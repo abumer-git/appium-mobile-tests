@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>appium-junit-demo</artifactId>
+    <artifactId>appium-junit-test</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -51,6 +51,12 @@
             <artifactId>slf4j-api</artifactId>
             <version>2.0.9</version>
         </dependency>
+<!--        Allure Reports-->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.20.1</version>
+        </dependency>
 
         <!-- Logback Classic implementation -->
         <dependency>
@@ -61,7 +67,6 @@
 
 
     </dependencies>
-
     <build>
         <plugins>
             <!-- Surefire plugin for JUnit 5 -->
@@ -73,6 +78,23 @@
                     <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
+
+            <!-- Allure Maven Plugin -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.11.2</version>
+            </plugin>
         </plugins>
     </build>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>allure</id>
+            <url>https://maven.pkg.github.com/allure-framework/allure2</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+
 </project>
