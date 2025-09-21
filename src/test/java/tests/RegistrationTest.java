@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import io.qameta.allure.Allure;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,7 +29,8 @@ public class RegistrationTest {
         caps.setCapability("deviceName", "sdk_gphone64_arm64");
         caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("app", "/Users/abumer/Downloads/CR-39D-Final_QA_1.apk");
-        caps.setCapability("noReset", true);
+        caps.setCapability("noReset", false);
+        caps.setCapability("fullReset", true);
         caps.setCapability("autoGrantPermissions", true);
         caps.setCapability("dontStopAppOnReset", true);
 
@@ -44,6 +46,7 @@ public class RegistrationTest {
     @Order(1)
     public void testRegistrationFlow() {
         logger.info("Starting registration flow test");
+        Allure.addAttachment("Registration Log", "Starting Registration Flow");
         registeredUser = TestData.getRandomUser();
         registeredUser.pin = "ABC123"; // hardcode pin
 
@@ -76,6 +79,8 @@ public class RegistrationTest {
 
         assertEquals(expectedName, actualName,
                 "The displayed user name on Home page should match registration details");
+        Allure.addAttachment("Assertion Log", "Expected: " + expectedName + ", Actual: " + actualName);
+        Allure.addAttachment("Registration Log", "Completed Registration Flow");
 
         logger.info("Assertion passed: Home page username is correct ✅");
 
@@ -90,3 +95,4 @@ public class RegistrationTest {
         }
     }
 }
+// show allure report : allure serve target/allure-results
