@@ -1,1 +1,3 @@
 tests/RegistrationTest.class
+pages/RegistrationPage.class
+pages/BasePage.class

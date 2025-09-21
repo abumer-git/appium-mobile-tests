@@ -14,67 +14,62 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <junit.version>5.10.2</junit.version>
-        <appium.version>9.2.2</appium.version>
-        <testng.version>7.10.2</testng.version>
-        <selenium.version>4.23.0</selenium.version>
     </properties>
 
     <dependencies>
-        <!-- ✅ JUnit 5 (use org.junit.jupiter imports in your tests) -->
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- ✅ TestNG (optional if you want to run with TestNG instead of JUnit) -->
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- ✅ Appium Java client -->
+        <!-- Appium Java client -->
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>${appium.version}</version>
+            <version>7.6.0</version>
         </dependency>
 
-        <!-- ✅ Selenium Core -->
+        <!-- Selenium Java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
+            <version>3.141.59</version>
         </dependency>
 
-        <!-- ✅ Extra Selenium modules (fix ContextAware / LocationContext issues) -->
+        <!-- SLF4J API -->
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-api</artifactId>
-            <version>${selenium.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.9</version>
         </dependency>
+
+        <!-- Logback Classic implementation -->
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-remote-driver</artifactId>
-            <version>${selenium.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.11</version>
         </dependency>
+
+
     </dependencies>
 
     <build>
         <plugins>
-            <!-- ✅ Surefire plugin for JUnit/TestNG execution -->
+            <!-- Surefire plugin for JUnit 5 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
-                    <!-- Allow both JUnit 5 and TestNG -->
                     <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
