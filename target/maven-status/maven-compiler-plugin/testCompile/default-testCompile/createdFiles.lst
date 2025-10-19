@@ -1,3 +1,7 @@
-tests/RegistrationTest.class
+tests/NewApplicationTest.class
+suite/FullFlowSuite.class
 pages/RegistrationPage.class
 pages/BasePage.class
+tests/RegistrationTest.class
+tests/TestSuiteTearDown.class
+pages/NewApplicationPage.class

@@ -83,7 +83,7 @@ public class RegistrationPage {
                 MobileBy.AccessibilityId("Next month")));
         nextMonthBtn.click();
         nextMonthBtn.click();
-        nextMonthBtn.click();
+//        nextMonthBtn.click();
 
         // Select day dynamically
         WebElement day = wait.until(ExpectedConditions.elementToBeClickable(

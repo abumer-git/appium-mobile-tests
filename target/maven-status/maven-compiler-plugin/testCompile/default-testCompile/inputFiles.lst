@@ -1,4 +1,8 @@
 /Users/abumer/IdeaProjects/appium-mobile-tests/src/test/java/pages/BasePage.java
+/Users/abumer/IdeaProjects/appium-mobile-tests/src/test/java/pages/NewApplicationPage.java
 /Users/abumer/IdeaProjects/appium-mobile-tests/src/test/java/pages/RegistrationPage.java
+/Users/abumer/IdeaProjects/appium-mobile-tests/src/test/java/suite/FullFlowSuite.java
 /Users/abumer/IdeaProjects/appium-mobile-tests/src/test/java/tests/LoginTest.java
+/Users/abumer/IdeaProjects/appium-mobile-tests/src/test/java/tests/NewApplicationTest.java
 /Users/abumer/IdeaProjects/appium-mobile-tests/src/test/java/tests/RegistrationTest.java
+/Users/abumer/IdeaProjects/appium-mobile-tests/src/test/java/tests/TestSuiteTearDown.java

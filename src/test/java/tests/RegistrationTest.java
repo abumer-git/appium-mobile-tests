@@ -1,54 +1,37 @@
 package tests;
 
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.*;
-import utils.TestData;
-import pages.RegistrationPage;
-import io.appium.java_client.android.AndroidDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.net.MalformedURLException;
-import java.net.URL;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import io.qameta.allure.Allure;
+import pages.BasePage;
+import pages.RegistrationPage;
+import utils.TestData;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RegistrationTest {
 
-    private static AndroidDriver driver;
-    private static TestData.User registeredUser;
-    private static RegistrationPage registrationPage;
+    private RegistrationPage registrationPage;
+    private TestData.User registeredUser;
     private static final Logger logger = LoggerFactory.getLogger(RegistrationTest.class);
 
     @BeforeAll
-    public static void setUp() throws MalformedURLException {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("platformName", "Android");
-        caps.setCapability("platformVersion", "12.0");
-        caps.setCapability("deviceName", "sdk_gphone64_arm64");
-        caps.setCapability("automationName", "UiAutomator2");
-        caps.setCapability("app", "/Users/abumer/Downloads/CR-39D-Final_QA_1.apk");
-        caps.setCapability("noReset", false);
-        caps.setCapability("fullReset", true);
-        caps.setCapability("autoGrantPermissions", true);
-        caps.setCapability("dontStopAppOnReset", true);
-
-
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
-        driver.resetApp();
-
-        registrationPage = new RegistrationPage(driver);
-        logger.info("Driver and RegistrationPage initialized successfully");
+    void initPageObjects() {
+        BasePage.initializeDriver(); // initialize singleton driver
+        registrationPage = new RegistrationPage(BasePage.getDriver());
+        logger.info("RegistrationPage initialized successfully");
     }
-
     @Test
     @Order(1)
     public void testRegistrationFlow() {
         logger.info("Starting registration flow test");
         Allure.addAttachment("Registration Log", "Starting Registration Flow");
+
         registeredUser = TestData.getRandomUser();
-        registeredUser.pin = "ABC123"; // hardcode pin
+        registeredUser.pin = "ABC123";
 
         registrationPage
                 .clickNewToCSCS()
@@ -69,30 +52,16 @@ public class RegistrationTest {
                 .loginAfterMobileOTP()
                 .tapZeroTimes(12)
                 .cancelTwice();
-        //  Final assertion
+
         String expectedName = registeredUser.firstName + " " + registeredUser.lastName;
         String actualName = registrationPage.getDisplayedUserName();
 
-        logger.info("Asserting Home page username...");
-        logger.info("Expected: " + expectedName);
-        logger.info("Actual: " + actualName);
+        logger.info("Asserting Home page username... Expected: {} Actual: {}", expectedName, actualName);
+        assertEquals(expectedName, actualName, "Displayed username should match registration details");
 
-        assertEquals(expectedName, actualName,
-                "The displayed user name on Home page should match registration details");
         Allure.addAttachment("Assertion Log", "Expected: " + expectedName + ", Actual: " + actualName);
         Allure.addAttachment("Registration Log", "Completed Registration Flow");
 
-        logger.info("Assertion passed: Home page username is correct ✅");
-
-        logger.info("Registration flow completed successfully");
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        if (driver != null) {
-            driver.quit();
-            logger.info("Driver closed");
-        }
+        logger.info("✅ Registration flow completed successfully");
     }
 }
-// show allure report : allure serve target/allure-results

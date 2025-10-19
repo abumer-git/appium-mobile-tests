@@ -5,7 +5,7 @@ import java.util.Random;
 public class TestData {
 
     private static final String[] FIRST_NAMES = {
-            "Mike", "John", "Alice", "Emma", "David", "Sophia", "Chris", "Olivia", "James", "Lily"
+            "Mike", "John", "Alice", "Emma", "David", "Sophia", "Chris", "Olivia", "James", "Lily", "Farhad", "Oscar"
     };
     private static final String LAST_NAME = "Khan";
     private static final String EMAIL_DOMAIN = "@yopmail.com";
