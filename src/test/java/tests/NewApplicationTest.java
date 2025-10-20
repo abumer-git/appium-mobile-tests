@@ -8,7 +8,7 @@ import pages.NewApplicationPage;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class NewApplicationTest {
+public class NewApplicationTest extends TestCase {
 
     private NewApplicationPage appPage;
     private static final Logger logger = LoggerFactory.getLogger(NewApplicationTest.class);
